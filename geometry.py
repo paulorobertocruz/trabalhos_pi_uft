@@ -10,7 +10,8 @@ def translation(image,new_x,new_y):
 
 
 def reflexao(image, eixo):
-    if image.mode is not "RGB":
+    if image.mode != "RGB":
+        print("Not RGB")
         return None
 
     x = lambda x: x
@@ -28,3 +29,22 @@ def reflexao(image, eixo):
             nimage.putpixel( (x(i), y(j) ), image.getpixel( (i,j) ) )
 
     return nimage
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) < 2:
+        print("faltando argumentos")
+        exit()
+
+    operation = sys.argv[1]
+    options = sys.argv[2]
+    image_path = sys.argv[3]
+
+    image = Image.open(image_path)
+    image.show()
+
+    if operation == "reflexao":
+        reflexao(image, options).show()
+    elif operation == "translation":
+        opt = options.split(',')
+        translation(image, int(opt[0]), int(opt[1]))
