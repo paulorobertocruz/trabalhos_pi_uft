@@ -7,3 +7,7 @@ def translation(image,new_x,new_y):
             p = image.getpixel(i,j)
             new.putpixel((i+new_x,j+new_y),(p[0],p[1],p[2]))
     return new
+
+
+def reflexao(image):
+    

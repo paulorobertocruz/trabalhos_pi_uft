@@ -44,3 +44,14 @@ def labelling(image):
                     g = random.randint(0,255)
                     b = random.randint(0,255)
                     new_image.putpixel((i,j),(r,g,b))
+
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Faltando path/to/image.png")
+        exit()
+
+    
