@@ -1,32 +1,5 @@
 from PIL import Image
 
-
-def in_range(a, r):
-    return  a[0] >= 0 and a[0] < r[0] and a[1] >= 0 and a[1] < r[1]
-
-
-def te():
-    img = Image.open("tocantins.jpg")
-    print(img.format, img.size, img.mode)
-    p = (100, 100)
-    print(img.getpixel(p))
-
-    img.putpixel(p, (0, 0, 0))
-    img.show()
-
-
-def visinhos_4(x, y):
-    return (x, y-1), (x, y+1), (x-1, y), (x+1, y)
-
-
-def visinhos_diagonal(x, y):
-    return (x - 1, y - 1), (x + 1, y - 1), (x - 1, y + 1), (x + 1, y + 1)
-
-
-def visinhos_8(x, y):
-    return visinhos_4(x, y), visinhos_diagonal(x, y)
-
-
 def n_interpolacao(img, s):
     size = img.size
 
@@ -34,7 +7,7 @@ def n_interpolacao(img, s):
     nheight = int(size[1] * s)
 
     n_img = Image.new("RGB",(nwidth, nheight), (0,0,0))
-    # print(n_img.size)
+
     for i in range(nwidth):
         for j in range(nheight):
             p = (int(i/s), int(j/s))
@@ -48,7 +21,7 @@ def b_interpolacao(img, s):
     nheight = int(size[1] * s)
 
     n_img = Image.new("RGB", (nwidth, nheight), (0,0,0))
-    # print(n_img.size)
+
     for i in range(nwidth-1):
         for j in range(nheight-1):
 
@@ -72,11 +45,18 @@ def b_interpolacao(img, s):
 
     return n_img
 
+if __name__ == "__main__":
+    import sys
 
-img = Image.open("tocantins.jpg")
-img.show()
-a = n_interpolacao(img, 1.3)
-a.show()
+    if len(sys.argv) < 1:
+        print("Faltando path/to/image.png")
+        exit()
 
-b = b_interpolacao(img, 1.3)
-b.show()
+    img = Image.open(sys.argv[1])
+    img.show()
+
+    a = n_interpolacao(img, 1.3)
+    a.show()
+
+    b = b_interpolacao(img, 1.3)
+    b.show()
