@@ -1,5 +1,5 @@
 from PIL import Image
-from random import Image
+from random import randint
 
 def in_range(a,r):
     return  a[0] >= 0 and a[0] < r[0] and a[1] >= 0 and a[1] < r[1]
@@ -53,5 +53,3 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Faltando path/to/image.png")
         exit()
-
-    
