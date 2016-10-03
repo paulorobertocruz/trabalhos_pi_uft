@@ -16,7 +16,7 @@ def blackAndWhite(image):
 def labelling(image):
     binary_image = blackAndWhite(image)
     new_image = Image.new("RGB", image.size, (255,255,255))
-    labels = [(100, 100, 100), (0, 0, 0), (0, 255, 0), (255, 0, 0), (0, 0, 255), (255, 200, 100)]
+    labels = [(255, 200, 100), (100, 100, 100), (0, 255, 0), (255, 0, 0), (0, 0, 255), (0, 0, 0)]
     next_label = 0
     similar_labels = [i for i in range(len(labels))]
     image_labels = [ [-1 for _ in range(image.size[1])] for _ in range(image.size[0])]
@@ -54,7 +54,8 @@ def labelling(image):
 
     for i in range(image.size[0]):
         for j in range(image.size[1]):
-            new_image.putpixel((i,j), labels[ similar_labels[image_labels[i][j]] ])
+            if image_labels[i][j] != -1:
+                new_image.putpixel((i,j), labels[ similar_labels[image_labels[i][j]] ])
     #preenche a imagem de labels
     return new_image
 
