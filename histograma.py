@@ -1,5 +1,15 @@
 from PIL import Image
 
+def grayscale(image):
+    new = Image.new("RGB",(image.size[0],image.size[1]),(0,0,0))
+    for i in range(image.size[0]):
+        for j in range(image.size[1]):
+            p = image.getpixel((i,j))
+            media = int((p[0]+p[1]+p[2])/3)
+            new.putpixel((i,j),(media,media,media))
+    return new
+
+
 def histograma(image):
     histogram = []
     for i in range(256):
@@ -34,7 +44,7 @@ def eq(norm):
             freq[i] = 256*norm[i] + freq[i-1]
     return freq
 
-def round(eq):
+def around(eq):
     r = []
     for i in range(256):
         r.append(0)
@@ -42,3 +52,20 @@ def round(eq):
         temp = int(eq[i])
         r[i] = temp
     return r
+
+def returnToImage(image,rounded):
+    new = Image.new("RGB",(image.size[0],image.size[1]),(0,0,0))
+    for i in range(image.size[0]):
+        for j in range(image.size[1]):
+            p = image.getpixel((i,j))
+            ind = int( (p[0]+p[1]+p[2])/3 )
+            new.putpixel((i,j),(rounded[ind],rounded[ind],rounded[ind]))
+    return new
+
+def histogram_equalization(image):
+    hist = histograma(image)
+    nor = normalizacao(image,hist)
+    equa = eq(nor)
+    rounded = around(equa)
+    new = returnToImage(image,rounded)
+    return new
