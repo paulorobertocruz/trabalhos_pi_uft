@@ -18,7 +18,7 @@ def histograma(image):
         for j in range(image.size[1]):
             p = image.getpixel((i,j))
             ind = int((p[0]+p[1]+p[2])/3)
-            quant = histogram[ ind ]
+            quant = histogram[ind]
             quant = quant + 1
             histogram[ ind ] = quant
     return histogram

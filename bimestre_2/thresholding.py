@@ -1,5 +1,12 @@
+import sys
+import os
+
+# para poder importar bimestre_1
+dir_name = os.path.dirname( os.path.dirname( os.path.realpath(__file__) ) )
+sys.path.append(dir_name)
+
 from PIL import Image
-from histograma import grayscale,histograma
+from bimestre_1.histograma import grayscale, histograma
 
 def thresholding(image):
     greyed_image = grayscale(image)
@@ -14,8 +21,8 @@ def thresholding(image):
             if(hist[i] < largest[0] and hist[i] > second_largest[0]):
                 second_largest = (hist[i],i)
     # print dos picos encontrados
-    print("largest peak is %d at %d" % (largest[0],largest[1]))
-    print("second largest peak is %d at %d" % (second_largest[0],second_largest[1]))
+    print("largest peak is %d at %d" % (largest[0], largest[1]))
+    print("second largest peak is %d at %d" % (second_largest[0], second_largest[1]))
     # encontrar o menor ponto do vale entre os dois picos
     if(largest[1] < second_largest[1]):
         x = hist[largest[1]:second_largest[1]]
@@ -37,3 +44,7 @@ def thresholding(image):
             else:
                 new.putpixel((i,j),(0,0,0))
     return new
+
+img = Image.open("img.jpg")
+img = thresholding(img)
+img.show()
