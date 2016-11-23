@@ -21,8 +21,8 @@ def thresholding(image):
             if(hist[i] < largest[0] and hist[i] > second_largest[0]):
                 second_largest = (hist[i],i)
     # print dos picos encontrados
-    print("largest peak is %d at %d" % (largest[0], largest[1]))
-    print("second largest peak is %d at %d" % (second_largest[0], second_largest[1]))
+    print("maior pico %d em %d" % (largest[0], largest[1]))
+    print("segundo maior pico %d em %d" % (second_largest[0], second_largest[1]))
     # encontrar o menor ponto do vale entre os dois picos
     if(largest[1] < second_largest[1]):
         x = hist[largest[1]:second_largest[1]]
@@ -33,7 +33,7 @@ def thresholding(image):
     #for i in range(len(hist)):
     #    if(hist[i]==least):
     #        threshold = i
-    print("threshold is %d" % threshold)
+    print("limiar é %d" % threshold)
     # binarizar a partir do threshold
     new = Image.new("RGB",(image.size[0],image.size[1]),(0,0,0))
     for i in range(image.size[0]):
